@@ -3,21 +3,21 @@
 name = "mytheme"
 
 # Is theme light or dark?
-#light = true
+light = true
 
 # Primary
-primary = "#1565c0"
+primary = "#016fb9"
 
 # Menu
-menu_primary = "#fff"
-menu_text = "#34495e"
-menu_text_active = "#2962ff"
-menu_title = "#2b2b2b"
+menu_primary = "#6d8ea0"
+menu_text = "#f9f9f9"
+menu_text_active = "#f9f9f9"
+menu_title = "#f9f9f9"
 
 # Home sections
 home_section_odd = "rgb(255, 255, 255)"
 home_section_even = "rgb(247, 247, 247)"
 
 [dark]
-  link = "#bbdefb"
-  link_hover = "#bbdefb"
+  link = "#22aed1"
+  link_hover = "#22aed1"
