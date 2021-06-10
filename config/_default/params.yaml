@@ -5,9 +5,9 @@
 
 # Appearance
 
-theme: 1950s
+theme: "mytheme"
 day_night: true
-font: ''
+font: 'myfonts'
 font_size: L
 
 # SEO
