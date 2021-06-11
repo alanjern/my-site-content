@@ -7,5 +7,6 @@ publication_types: ["1"]
 abstract: ""
 featured: false
 publication: "*Proceedings of the 33rd Annual Conference of the Cognitive Science Society*"
+url_pdf: files/papers/influencediagrams_cogsci11.pdf
 ---
 
