@@ -8938,7 +8938,7 @@ html[dir='rtl'] body {
   padding-top: 50px; }
 
 .home-section:nth-of-type(even) {
-  background: #f7f7f7; }
+  background: #fef9f1; }
 
 .dark .home-section {
   background: #272935; }

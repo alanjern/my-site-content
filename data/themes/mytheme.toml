@@ -16,7 +16,7 @@ menu_title = "#f9f9f9"
 
 # Home sections
 home_section_odd = "rgb(255, 255, 255)"
-home_section_even = "rgb(247, 247, 247)"
+home_section_even = "rgb(254, 249, 241)"
 
 [dark]
   link = "#22aed1"

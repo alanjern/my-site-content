@@ -9,7 +9,7 @@ active: true
 headless: true
 
 # Order that this section appears on the page.
-weight: 30
+weight: 90
 
 title: Contact
 subtitle:
