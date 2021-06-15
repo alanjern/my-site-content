@@ -6,3 +6,5 @@ header:
 title: Blog
 view: 3
 ---
+
+## No posts yet! 😞
