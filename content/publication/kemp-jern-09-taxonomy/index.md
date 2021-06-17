@@ -7,6 +7,6 @@ publication_types: ["1"]
 abstract: ""
 featured: false
 publication: "*Proceedings of the 31st Annual Conference of the Cognitive Science Society*"
-url_pdf: files/papers/taxonomy_cogsci09.pdf
+url_pdf: uploads/papers/taxonomy_cogsci09.pdf
 ---
 

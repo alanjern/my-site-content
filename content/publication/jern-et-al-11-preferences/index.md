@@ -7,6 +7,6 @@ publication_types: ["1"]
 abstract: ""
 featured: false
 publication: "*Advances in Neural Information Processing Systems 24*"
-url_pdf: files/papers/preferencelearning_nips11.pdf
+url_pdf: uploads/papers/preferencelearning_nips11.pdf
 ---
 

@@ -13,23 +13,23 @@ comments: false
 
 ### Fall
 
-* Introduction to Psychology 👁 🐀 👶️ ([previous syllabus](/files/syllabi/intro_spring21.pdf))
-* Cognitive Psychology 🧠 🤔 💭 ([previous syllabus](/files/syllabi/cogpsych_fall20.pdf))
+* Introduction to Psychology 🤔 ({{% staticref "uploads/syllabi/intro_spring21.pdf" %}}previous syllabus{{% /staticref %}})
+* Cognitive Psychology 🧠 ({{% staticref "uploads/syllabi/cogpsych_fall20.pdf" %}}previous syllabus{{% /staticref %}})
 
 ### Winter
 
-* Applied Psychology 🤓 😴 📝 (new course)
+* Applied Psychology 📝 (new course)
 
 ### Spring
 
-* Computational Psychology 👩‍💻 🤖 ([previous syllabus](/files/syllabi/cogpsych_fall20.pdf))
-* Introduction to Psychology 👁 🐀 👶
+* Computational Psychology 🤖 ({{% staticref "uploads/syllabi/comppsych_fall19.pdf" %}}previous syllabus{{% /staticref %}})
+* Introduction to Psychology 🤔
 
 ## Other courses
 
-* Moral Psychology 🚂 😇 😈 ([previous syllabus](/files/syllabi/moralpsych_winter20.pdf))
-* Methods for Studying Human Behavior 📓 📊 ([previous syllabus](/files/syllabi/methods_spring21.pdf))
-* Social Psychology 👨‍👩‍👧‍👦 👭 ([previous syllabus](/files/syllabi/socialpsych_spring19.pdf))
+* Moral Psychology 😈 ({{% staticref "uploads/syllabi/moralpsych_winter20.pdf" %}}previous syllabus{{% /staticref %}})
+* Methods for Studying Human Behavior 📊 ({{% staticref "uploads/syllabi/methods_spring21.pdf" %}}previous syllabus{{% /staticref %}})
+* Social Psychology 👭 ({{% staticref "uploads/syllabi/social_spring19.pdf" %}}previous syllabus{{% /staticref %}})
 
 ## Class projects
 

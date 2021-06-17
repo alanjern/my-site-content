@@ -7,7 +7,7 @@ publication_types: ["2"]
 abstract: ""
 featured: false
 publication: "*Psychological Review*"
-url_pdf: "files/papers/polarization_psychreview14.pdf"
+url_pdf: "uploads/papers/polarization_psychreview14.pdf"
 links:
 - name: DOI
   url: http://dx.doi.org/10.1037/a0035941

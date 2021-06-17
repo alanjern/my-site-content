@@ -7,7 +7,7 @@ publication_types: ["2"]
 abstract: ""
 featured: false
 publication: "*Psychonomic Bulletin & Review*"
-url_pdf: files/papers/taxonomy_pbr.pdf
+url_pdf: uploads/papers/taxonomy_pbr.pdf
 links:
 - name: DOI
   url: http://dx.doi.org/10.3758/s13423-013-0467-3

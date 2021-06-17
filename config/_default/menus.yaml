@@ -23,7 +23,7 @@ main:
     url: lab/
     weight: 50
   - name: Blog
-    url: blog/
+    url: post/
     weight: 60
   - name: Contact
     url: '#contact'

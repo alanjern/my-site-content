@@ -7,7 +7,7 @@ publication_types: ["2"]
 abstract: ""
 featured: false
 publication: "*Cognitive Psychology*"
-url_pdf: "files/papers/catgen_cognitivepsychology13.pdf"
+url_pdf: "uploads/papers/catgen_cognitivepsychology13.pdf"
 links:
 - name: DOI
   url: http://dx.doi.org/10.1016/j.cogpsych.2012.09.003

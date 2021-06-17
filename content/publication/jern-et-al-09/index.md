@@ -7,9 +7,9 @@ publication_types: ["1"]
 abstract: ""
 featured: false
 publication: "*Advances in Neural Information Processing Systems 22*"
-url_pdf: files/papers/beliefpolarization_nips09.pdf
+url_pdf: uploads/papers/beliefpolarization_nips09.pdf
 links:
 - name: Supporting material
-  url: files/papers/beliefpolarizationsupport_nips09.pdf
+  url: uploads/papers/beliefpolarizationsupport_nips09.pdf
 ---
 

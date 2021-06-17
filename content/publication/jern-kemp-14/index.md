@@ -7,6 +7,6 @@ publication_types: ["1"]
 abstract: ""
 featured: false
 publication: "*Proceedings of the 36th Annual Conference of the Cognitive Science Society*"
-url_pdf: files/papers/socialreasoning_cogsci14.pdf
+url_pdf: uploads/papers/socialreasoning_cogsci14.pdf
 ---
 

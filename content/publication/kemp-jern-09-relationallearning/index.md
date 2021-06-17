@@ -7,6 +7,6 @@ publication_types: ["1"]
 abstract: ""
 featured: false
 publication: "*Advances in Neural Information Processing Systems 22*"
-url_pdf: files/papers/relationallearning_nips09.pdf
+url_pdf: uploads/papers/relationallearning_nips09.pdf
 ---
 
