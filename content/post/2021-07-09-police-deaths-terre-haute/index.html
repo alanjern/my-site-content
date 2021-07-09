@@ -1,0 +1,196 @@
+---
+title: "Three police offers have died in Terre Haute, IN in the last 10 years. Is that a lot?"
+subtitle: "Data suggests it is, relative to Terre Haute's population."
+summary: "A THPD detective was shot and killed this week, making it the third officer death in Terre Haute in the past 10 years. I compared officer death counts to find out if this is a large number given Terre Haute's relatively small size."
+author: "Alan Jern"
+date: '2021-07-09'
+image:
+  caption: 'Image credit: **[Matt Popovich](https://unsplash.com/@mattpopovich?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)** on **[Unsplash](https://unsplash.com/s/photos/police?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)**.'
+  focal_point: ""
+  placement: 2
+  preview_only: false
+tags:
+- police
+- law enforcement
+- Terre Haute
+- R
+- data visualization
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="background" class="section level1">
+<h1>Background 🔎</h1>
+<p>This week, Terre Haute Police Department Detective Greg Ferency <a href="https://www.cnn.com/2021/07/08/us/indiana-police-officer-fbi-task-force-ambushed/index.html">was shot</a> on the job. This is where I live and, as the local news <a href="https://www.wthitv.com/content/news/Three-Terre-Haute-Police-Department-deaths-in-10-years---the-citys-mayor-shares-his-thoughts-574794821.html">noted</a>, it was the third police death in the THPD in 10 years. For a city of only around 60,000, this seemed like a lot and led my wife to wonder if it was unusually high. I tried to find out.</p>
+<p><img src="crime-scene-wthi.jpg" alt="Crime scene photo" />
+<em>Photo: <a href="https://www.wthitv.com/content/news/Police-search-for-suspect-after-an-officer-was-shot-in-Terre-Haute-574784911.html">WTHI</a></em></p>
+</div>
+<div id="the-data" class="section level1">
+<h1>The data 📒</h1>
+<p>🗄 I collected data on police officer deaths from the <a href="https://www.odmp.org/">Officer Down Memorial Page</a>. Their database includes “line of duty” deaths from all causes going back to before 1800. I decided to only collect data from 1980 to today (the most recent death in the database was the death in Terre Haute). So my analysis is only of deaths from the last ~30 years.</p>
+<p>🗄 Data on US <a href="https://www.census.gov/data/datasets/time-series/demo/popest/2010s-counties-total.html">county</a> and <a href="https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-cities-and-towns.html">city</a> populations came from the <a href="https://www.census.gov/en.html">US Census</a>. This data includes annual population estimates going back about 10 years. For this analysis, I just decided to use the population numbers from the 2010 census.</p>
+</div>
+<div id="how-i-combined-the-data" class="section level1">
+<h1>How I combined the data</h1>
+<p>I made a few assumptions to get the data in a workable format. First, I narrowed the set of police deaths down to those that occurred in departments that had <code>Police Department</code> or <code>Sheriff's Department</code> in the name.</p>
+<p>The police deaths dataset only included department names and states. So to determine the exact location of each department, I assumed each department was named after the city or county where it was located (e.g. Dallas Police Department in the city of Dallas). If a department didn’t follow this naming convention, it was excluded from analysis.</p>
+<p>Finally, I matched up the city and county names with the names in the census data sets. Sometimes they didn’t match. For example, Nashville appears in the census data set as <code>Nashville-Davidson metropolitan government</code>.</p>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<div id="cumulative-deaths-compared-to-population" class="section level2">
+<h2>Cumulative deaths compared to population</h2>
+<p>First, let’s just compare city/county population to the cumulative number of officer deaths since 1980.</p>
+<pre class="r"><code>popVsDeaths &lt;- ggplot() +
+  geom_point(data = filter(deathCountsWithLabels, population &lt;= 75000),
+             mapping = aes(x = log10(population), y = numDeaths, shape = locationType),
+             color = &quot;turquoise3&quot;, alpha = 1/3, show.legend = FALSE) +
+  geom_point(data = filter(deathCountsWithLabels, population &gt; 75000),
+             mapping = aes(x = log10(population), y = numDeaths, shape = locationType),
+             color = &quot;darkslategrey&quot;, alpha = 1/3) +
+  geom_point(data = deathCountsHighlights,
+             mapping = aes(x = log10(population), y = numDeaths, shape = locationType),
+             color = &quot;orangered1&quot;,
+             show.legend = FALSE) +
+  geom_text_repel(data = deathCountsWithLabels,
+                  mapping = aes(x = log10(population), y = numDeaths, label = locationLabel),
+                  size = 3,
+                  max.overlaps = Inf) +
+  scale_x_continuous(labels = c(&quot;100&quot;, &quot;1,000&quot;, &quot;10,000&quot;, &quot;100,000&quot;, &quot;1,000,000&quot;, &quot;10,000,000&quot;)) +
+  labs(x = &quot;Population&quot;,
+       y = &quot;Deaths&quot;,
+       shape = &quot;Location Type&quot;,
+       title = str_c(&quot;Officer Deaths, &quot;, startingYear, &quot;-&quot;, finalYear)) +
+  guides(shape = guide_legend(override.aes = list(alpha = 1, color = &quot;black&quot;)))
+print(popVsDeaths)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/pop-vs-deaths-plot-1.png" width="672" /></p>
+<p>⚠️ One problem with this plot is that many departments showing zero deaths are actually mistakes. This is due to the overly simple department-location matching procedure I used.</p>
+<p>One example is the Miami-Dade Police Department. This got included because it has the phrase <code>Police Department</code> in it. However, Miami-Dade is a county (a large one, with about 2.5 million people living there) and is identified as <code>Miami-Dade County</code> in my county population dataset. So the department name and county name fail to match because the word “county” doesn’t appear in the name of the department.</p>
+<p>This actually happened a lot, so you can’t really trust all the zeros. But surely some of the zeros are accurate – it’s possible for a small-town department to have zero officer deaths. To not include them at all would also be a mistake. But I think including all the mistaken zeros ended up being a bigger mistake overall.</p>
+<p>So here’s the same plot with the zeros removed.</p>
+<pre class="r"><code>popVsDeaths2 &lt;- ggplot() +
+  geom_point(data = filter(deathCountsWithLabels2, population &lt;= 75000),
+             mapping = aes(x = log10(population), y = numDeaths, shape = locationType),
+             color = &quot;turquoise3&quot;, alpha = 1/3, show.legend = FALSE) +
+  geom_point(data = filter(deathCountsWithLabels2, population &gt; 75000),
+             mapping = aes(x = log10(population), y = numDeaths, shape = locationType),
+             color = &quot;darkslategrey&quot;, alpha = 1/3) +
+  geom_point(data = deathCountsHighlights2,
+             mapping = aes(x = log10(population), y = numDeaths, shape = locationType),
+             color = &quot;orangered1&quot;,
+             show.legend = FALSE) +
+  geom_text_repel(data = deathCountsWithLabels2,
+                  mapping = aes(x = log10(population), y = numDeaths, label = locationLabel),
+                  size = 3,
+                  max.overlaps = Inf) +
+  scale_x_continuous(labels = c(&quot;1,000&quot;, &quot;10,000&quot;, &quot;100,000&quot;, &quot;1,000,000&quot;, &quot;10,000,000&quot;)) +
+  labs(x = &quot;Population&quot;,
+       y = &quot;Deaths&quot;,
+       shape = &quot;Location&quot;,
+       title = str_c(&quot;Officer Deaths, &quot;, startingYear, &quot;-&quot;, finalYear),
+       subtitle = &quot;Locations where at least one death occurred&quot;) +
+  guides(shape = guide_legend(override.aes = list(alpha = 1, color = &quot;black&quot;)))
+print(popVsDeaths2)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/pop-vs-deaths-plot-no-zeros-1.png" width="672" /></p>
+<p>Many fewer departments (especially from small cities), but same basic shape. In both plots, I’ve colored small towns like Terre Haute in turquoise and also higlighted a few standout locations to help you orient yourself.</p>
+</div>
+<div id="scaling-by-population" class="section level2">
+<h2>Scaling by population</h2>
+<p>These plots are a little hard to make sense of because the larger cities have way more deaths which squashes the plot vertically and makes it difficult to draw comparisons. So let’s try scaling the number of deaths by city/county population.</p>
+<p><em>Note</em>: Arguably it would make more sense to scale by department size, but this information is harder to come by. I assume department size is correlated with population anyway.</p>
+<p><em>Also, from this point on, I’m going to continue to exclude the zero-death locations for the reasons explained above.</em></p>
+<pre class="r"><code>scaledPopsVsDeaths &lt;- ggplot(data = deathCountsNoZeros) +
+  geom_point(mapping = aes(x = log10(population), y = deathsPer10k, size = numDeaths),
+             shape = &quot;circle open&quot;,
+             alpha = 1/3) +
+  geom_point(data = deathCountsHighlights2,
+             mapping = aes(x = log10(population), y = deathsPer10k, size = numDeaths),
+             shape = &quot;circle&quot;,
+             color = &quot;coral3&quot;,
+             show.legend = FALSE) +
+  geom_text_repel(data = deathCountsWithLabels2,
+                  mapping = aes(x = log10(population), y = deathsPer10k, size = numDeaths,
+                                label = locationLabel),
+                  size = 3,
+                  max.overlaps = Inf) +
+  scale_x_continuous(labels = c(&quot;1,000&quot;, &quot;10,000&quot;, &quot;100,000&quot;, &quot;1,000,000&quot;, &quot;10,000,000&quot;)) +
+  labs(x = &quot;Population&quot;,
+       y = &quot;Deaths per 10K&quot;,
+       size = &quot;Total deaths&quot;,
+       title = &quot;Officer deaths per 10,000 in the department&#39;s jurisdiction&quot;,
+       subtitle = str_c(&quot;Cumulative deaths, &quot;, startingYear, &quot;-&quot;, finalYear)) +
+  theme(legend.position = &quot;bottom&quot;)
+  
+print(scaledPopsVsDeaths)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/scaled-pop-vs-deaths-plot-1.png" width="672" /></p>
+<p>This plot suggests that Terre Haute is above average but maybe not a huge outlier, even among cities of similar population size.</p>
+<p>More generally, this plot suggests there is not much of a relationship between city size and number of officer deaths, at least for cities above a certain size. The reason it looks like there is a relationship between population and deaths is almost certainly due to there being greater variability for smaller towns/departments. For example, a single death in a small town would have a big effect on this metric.</p>
+<p>So let’s exclude small towns (population &lt; 50,000) to get a better understanding.</p>
+<pre class="r"><code>scaledPopsVsDeaths_noSmallTowns &lt;- ggplot(data = deathCounts_noSmallTowns) +
+  geom_point(mapping = aes(x = log10(population), y = deathsPer10k, size = numDeaths),
+             shape = &quot;circle open&quot;,
+             alpha = 1/3) +
+  geom_point(data = deathCountsHighlights_noSmallTowns,
+             mapping = aes(x = log10(population), y = deathsPer10k, size = numDeaths),
+             shape = &quot;circle&quot;,
+             color = &quot;coral3&quot;,
+             show.legend = FALSE) +
+  geom_text_repel(data = deathCountsWithLabels_noSmallTowns,
+                  mapping = aes(x = log10(population), y = deathsPer10k, size = numDeaths,
+                                label = locationLabel),
+                  size = 3) +
+  scale_x_continuous(breaks = c(4,5,6,7),
+                     labels = c(&quot;10,000&quot;, &quot;100,000&quot;, &quot;1,000,000&quot;, &quot;10,000,000&quot;)) +
+  labs(x = &quot;Population&quot;,
+       y = &quot;Deaths per 10K&quot;,
+       size = &quot;Total deaths&quot;,
+       title = &quot;Officer deaths per 10,000 people in the department&#39;s jurisdiction&quot;,
+       subtitle = str_c(&quot;Cumulative deaths, &quot;, startingYear, &quot;-&quot;, finalYear)) +
+  theme(legend.position = &quot;bottom&quot;)
+  
+print(scaledPopsVsDeaths_noSmallTowns)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/scaled-pops-vs-deaths-no-small-towns-plot-1.png" width="672" /></p>
+<p>This plot allows us to get a better sense of variability, especially among midsize towns. In this plot, Terre Haute does look a bit more like an outlier. In more quantitative terms, among the locations in the plot above, <strong>Terre Haute is in the 99th percentile for officer deaths</strong>, scaled by population size. It drops to the 93rd percentile if you include the small towns that were in the previous plot.</p>
+</div>
+<div id="officer-deaths-over-time" class="section level2">
+<h2>Officer deaths over time</h2>
+<p>One last question I had was whether Terre Haute’s outlier status was driven by the last 10 years. To get a sense of this, let’s look at officer deaths over time.</p>
+<pre class="r"><code>deathsOverTime &lt;- ggplot(data = deathCountsByYear) +
+  geom_step(mapping = aes(x = EOW, y = deathsPer10k, group = location_long),
+            alpha = 1/12) +
+  geom_step(data = deathCountsByYearHighlights,
+            mapping = aes(x = EOW, y = deathsPer10k, group = location_long),
+            color = &quot;gold2&quot;,
+            alpha = 2/3) +
+  geom_step(data = filter(deathCountsByYear, location_long == &quot;Terre Haute, IN&quot;),
+            mapping = aes(x = EOW, y = deathsPer10k),
+            color = &quot;coral3&quot;,
+            size = 1.5) +
+  geom_text_repel(data = filter(deathCountsByYearHighlights, EOW == today()),
+                  mapping = aes(x = EOW, y = deathsPer10k, group = location_long,
+                                label = location_long),
+                  size = 3) +
+  labs(title = &quot;Cumulative officer deaths&quot;,
+       subtitle = &quot;Jurisdictions with populations &gt; 50,000&quot;,
+       x = &quot;Date&quot;,
+       y = &quot;Total deaths per 10,000 residents&quot;) +
+  theme_minimal() +
+  theme(panel.grid.minor.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.y = element_blank())
+print(deathsOverTime)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/deaths-over-time-plot-1.png" width="672" /></p>
+<p>This plot shows cumulative deaths since 1980 for each department serving an area over 50,000 (again limited to only those departments that had at least one death). Terre Haute is highlighted. It gives the impression that Terre Haute wasn’t much of an outlier until the past 10 years when the last three officers died.</p>
+<p>It also shows that no officers died in Terre Haute for several decades before 2011.</p>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion ☑️</h1>
+<p>I think it’s fair to say that, right now, Terre Haute stands out statistically. The question is whether that’s indicative of anything meaningful. With thousands of jurisdictions across the US, some are bound to have unusually high numbers of deaths due to random chance alone. So it’s hard to draw any broad conclusions from these results without more information.</p>
+<p>For example, speaking for myself, as someone pretty ignorant of law enforcement, I imagined “line of duty” deaths to be the result of attacks at the hands of suspects. But a number of the deaths in the dataset were caused by things like car crashes, Covid-19 (from the past two years), and heart attacks – things that happened while on the job but might be hard to attribute to the job itself. My point isn’t to diminish any of these deaths at all, only to point out that more deaths isn’t necessarily a sign of some systematic failure of a department. You would need to look at the causes of death (among other factors) before drawing a conclusion like that.</p>
+<div id="code-and-data" class="section level2">
+<h2>Code and data 📑</h2>
+<p>Data and full analysis code to generate these plots are available <a href="https://github.com/alanjern/police-officer-deaths">here</a>.</p>
+</div>
+</div>
