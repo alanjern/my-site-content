@@ -35,7 +35,7 @@ library(ggrepel)
 
 # The data 📒
 
-🗄 I collected data on police officer deaths from the [Officer Down Memorial Page](https://www.odmp.org/). Their database includes "line of duty" deaths from all causes going back to before 1800. I decided to only collect data from 1980 to today (the most recent death in the database was the death in Terre Haute). So my analysis is only of deaths from the last ~30 years.
+🗄 I collected data on police officer deaths from the [Officer Down Memorial Page](https://www.odmp.org/). Their database includes "line of duty" deaths from all causes going back to before 1800. I decided to only collect data from 1980 to today (the most recent death in the database was the death in Terre Haute). So my analysis is only of deaths from the last ~40 years.
 
 🗄 Data on US [county](https://www.census.gov/data/datasets/time-series/demo/popest/2010s-counties-total.html) and [city](https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-cities-and-towns.html) populations came from the [US Census](https://www.census.gov/en.html). This data includes annual population estimates going back about 10 years. For this analysis, I just decided to use the population numbers from the 2010 census.
 
@@ -372,4 +372,4 @@ For example, speaking for myself, as someone pretty ignorant of law enforcement,
 
 ## Code and data 📑
 
-Data and full analysis code to generate these plots are available [here](https://github.com/alanjern/police-officer-deaths). 
+Data and the full analysis code I used to generate these plots are available [here](https://github.com/alanjern/police-officer-deaths). 
