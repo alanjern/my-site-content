@@ -176,9 +176,9 @@ print(popVsDeaths)
 
 One example is the Miami-Dade Police Department. This got included because it has the phrase `Police Department` in it. However, Miami-Dade is a county (a large one, with about 2.5 million people living there) and is identified as `Miami-Dade County` in my county population dataset. So the department name and county name fail to match because the word "county" doesn't appear in the name of the department.
 
-This actually happened a lot, so you can't really trust all the zeros. But surely some of the zeros are accurate -- it's possible for a small-town department to have zero officer deaths. To not include them at all would also be a mistake. But I think including all the mistaken zeros ended up being a bigger mistake overall.
+This actually happened a lot, so you can't really trust all the zeros. But surely some of the zeros are accurate. For example, [this site](https://inlem.org/lodd-stats/) reports that 16 out of Indiana's 92 counties have had no "line of duty" deaths. To not include departments with no deaths would be a mistake. But given the dataset I had, there wasn't a reliable way to identify those departments, and I knew for a fact that many of the zeros I found were simply due to name mismatches. So I decided it was best overall to just remove the zeros entirely.
 
-So here's the same plot with the zeros removed.
+Here's the same plot with the zeros removed.
 
 ```{r echo=FALSE}
 # Create new datasets that don't include locations with 0 deaths
@@ -368,7 +368,7 @@ It also shows that no officers died in Terre Haute for several decades before 20
 
 I think it's fair to say that, right now, Terre Haute stands out statistically. The question is whether that's indicative of anything meaningful. With thousands of jurisdictions across the US, some are bound to have unusually high numbers of deaths due to random chance alone. So it's hard to draw any broad conclusions from these results without more information.
 
-For example, speaking for myself, as someone pretty ignorant of law enforcement, I imagined "line of duty" deaths to be the result of attacks at the hands of suspects. But a number of the deaths in the dataset were caused by things like car crashes, Covid-19 (from the past two years), and heart attacks -- things that happened while on the job but might be hard to attribute to the job itself. My point isn't to diminish any of these deaths at all, only to point out that more deaths isn't necessarily a sign of some systematic failure of a department. You would need to look at the causes of death (among other factors) before drawing a conclusion like that.
+For example, speaking for myself, as someone pretty ignorant of law enforcement, I imagined "line of duty" deaths to be the result of attacks at the hands of suspects. But a number of the deaths in the dataset were caused by things like car crashes, Covid-19 (from the past two years), and heart attacks -- things that happened while on the job but might be hard to attribute to the job itself. My point isn't to diminish any of these deaths at all, only to point out that more deaths isn't necessarily a sign of some underlying cause or problem. You would need to look at the causes of death (among other factors) before drawing a conclusion like that.
 
 ## Code and data 📑
 
