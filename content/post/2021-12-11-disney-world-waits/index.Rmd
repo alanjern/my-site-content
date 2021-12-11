@@ -54,7 +54,7 @@ To try to answer that question, I found a great [dataset](https://touringplans.c
 
 ## A year at Magic Kingdom in waits
 
-For Magic Kingdom, Touring Plans has data for three attractions: *Pirates of the Caribbean*, *Seven Dwarfs Mine Train*, and *Splash Mountain*. To get a sense of how waits at Magic Kingdom vary over the calender year, I took waits from every day between January 1st, 2015 and March 15, 2020 (the last day Disney World before it shut down for Covid), dropped the year (combining, for example, all waits from January 1st from all years), then computed the mean waits for each day of the year based on the three attractions.
+For Magic Kingdom, Touring Plans has data for three attractions: *Pirates of the Caribbean*, *Seven Dwarfs Mine Train*, and *Splash Mountain*. To get a sense of how waits at Magic Kingdom vary over the calender year, I took waits from every day between January 1st, 2015 and March 15, 2020 (the last day Disney World was open before it shut down for Covid), dropped the year (combining, for example, all waits from January 1st from all years), then computed the mean waits for each day of the year based on the three attractions.
 
 Here are the results.
 
@@ -540,7 +540,7 @@ The pattern is basically the same. Generally lower-than-expected waits and an ap
 
 Not quite yet.
 
-As a check, I compared my work to the weekly ranking developed by Dave Shrute of [yourfirstvisit.net](https://yourfirstvisit.net/). Dave doesn't base his recommendations on statistics and data analysis. Instead, they're based on his years of firsthand knowledge and experience. [Here](https://yourfirstvisit.net/2021/01/11/the-best-weeks-in-2021-to-visit-walt-disney-world-ranked-in-order/) are his recommendations for 2021.
+As a check, I compared my work to the weekly ranking developed by Dave Shute of [yourfirstvisit.net](https://yourfirstvisit.net/). Dave doesn't base his recommendations on statistics and data analysis. Instead, they're based on his years of firsthand knowledge and experience. [Here](https://yourfirstvisit.net/2021/01/11/the-best-weeks-in-2021-to-visit-walt-disney-world-ranked-in-order/) are his recommendations for 2021.
 
 ![yourfirsrtvisit's 2021 Disney World weekly visit rankings](images/yfw_bestweeks_2021.png)
 Surprisingly, his recommendations don't align with mine much at all. Some of his top-ranked weeks are in the middle of summer. After that, he recommends going in mid-April and early May.
