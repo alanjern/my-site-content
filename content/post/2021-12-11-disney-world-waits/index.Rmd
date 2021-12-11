@@ -540,7 +540,7 @@ The pattern is basically the same. Generally lower-than-expected waits and an ap
 
 Not quite yet.
 
-As a check, I compared my work to the weekly ranking developed by Dave Shrute of [yourfirstvisit.net](https://yourfirstvisit.net/). Dave doesn't base his recommendations on statistics and data analysis. Instead, they're based on his years of firsthand knowledge and experience. [Here](https://yourfirstvisit.net/2021/01/11/the-best-weeks-in-2021-to-visit-walt-disney-world-ranked-in-order/) are his recommendations for 2021.
+As a check, I compared my work to the weekly ranking developed by Dave Shute of [yourfirstvisit.net](https://yourfirstvisit.net/). Dave doesn't base his recommendations on statistics and data analysis. Instead, they're based on his years of firsthand knowledge and experience. [Here](https://yourfirstvisit.net/2021/01/11/the-best-weeks-in-2021-to-visit-walt-disney-world-ranked-in-order/) are his recommendations for 2021.
 
 ![yourfirsrtvisit's 2021 Disney World weekly visit rankings](images/yfw_bestweeks_2021.png)
 Surprisingly, his recommendations don't align with mine much at all. Some of his top-ranked weeks are in the middle of summer. After that, he recommends going in mid-April and early May.
