@@ -13,12 +13,12 @@ comments: false
 
 ### Fall
 
-* Introduction to Psychology 🤔 ({{% staticref "uploads/syllabi/intro_spring21.pdf" %}}previous syllabus{{% /staticref %}})
-* Cognitive Psychology 🧠 ({{% staticref "uploads/syllabi/cogpsych_fall20.pdf" %}}previous syllabus{{% /staticref %}})
+* Introduction to Psychology 🤔 ({{% staticref "uploads/syllabi/intro_fall21.pdf" %}}previous syllabus{{% /staticref %}})
+* Cognitive Psychology 🧠 ({{% staticref "uploads/syllabi/cogpsych_fall21.pdf" %}}previous syllabus{{% /staticref %}})
 
 ### Winter
 
-* Applied Psychology 📝 (new course)
+* Applied Psychology 📝 ({{% staticref "uploads/syllabi/appliedpsych_winter21.pdf" %}}previous syllabus{{% /staticref %}})
 
 ### Spring
 
