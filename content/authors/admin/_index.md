@@ -45,4 +45,4 @@ avatarlink: starwars/
 
 I'm a cognitive scientist and psychologist. I use computational models and behavioral experiments to study how people think and reason. I'm primarily interested in social cognition: how people think about other people. I have also studied how people learn and use concepts, and how people revise their beliefs after seeing new evidence.
 
-I write about TV and psychology at [Overthinking TV](https://overthinkingtv.com/).
+I write about TV and psychology at [Overthinking TV](http://overthinkingtv.com/).
