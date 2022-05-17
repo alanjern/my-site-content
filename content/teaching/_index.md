@@ -39,11 +39,6 @@ comments: false
 ### Spring
 
 * Moral Psychology ({{% staticref "uploads/syllabi/moralpsych_winter20.pdf" %}}previous syllabus{{% /staticref %}})
-* Introduction to Psychology
-
-
-## Other courses
-
 * Methods for Studying Human Behavior ({{% staticref "uploads/syllabi/methods_spring21.pdf" %}}previous syllabus{{% /staticref %}})
 
 
