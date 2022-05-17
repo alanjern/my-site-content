@@ -15,11 +15,11 @@ If you're interested in doing psychology research, especially if you have progra
 
 ## Current lab members
 
-* Andrea Wynn, *Project*: Moral character inference
 * Stephen Payne, *Project*: Social prediction
 
 ## Former lab members
 
+* Andrea Wynn, *Project*: Moral character inference
 * Abi Raghuram, *Project*: Moral character inference
 * Anna Scott, *Project*: Inferring social relationships
 * Trinity Merrell, *Project*: Individual differences in game-based education
