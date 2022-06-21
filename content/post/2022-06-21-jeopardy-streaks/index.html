@@ -1,0 +1,182 @@
+---
+title: "Are win streaks on Jeopardy becoming more common?"
+subtitle: "Aside from a recent outlier season, probably not."
+summary: "A recent unprecedented run of winning streaks on *Jeopardy* has led some to wonder whether something about the show or the contestants has changed. But is there anything in the data to suggest that this is an actual trend? Looking at data from all 38 seasons points to the recent run of streaks more likely being an outlier than part of a trend."
+author: "Alan Jern"
+date: '2022-06-21'
+image:
+  caption: 'Amy Schneider on *Jeopardy*.'
+  focal_point: ""
+  placement: 2
+  preview_only: false
+categories:
+- Data analysis
+tags:
+- Jeopardy
+- R
+- data visualization
+---
+
+
+
+<p>Three of the top five longest winning streaks in <em>Jeopardy</em> history have happened during the show’s current 38th season. This has led <a href="https://www.nytimes.com/2022/01/09/arts/television/jeopardy-streaks-amy-schneider.html?referringSource=articleShare">some to wonder</a> whether there has been some kind of paradigm shift in how <em>Jeopardy</em> is played.</p>
+<p>It’s possible the answer is yes, but it would be a little surprising for it to happen so suddenly. If something about the game or how people play it were changing, it’s more likely that you’d find changing trends over time.</p>
+<p>I collected <em>Jeopardy</em> win data from every episode from <a href="https://j-archive.com/">J! Archive</a>, an unofficial database of questions and outcomes from the show, to see if I could find any trends.</p>
+<p>(Collecting and organizing this data turned out to be trickier than I expected. I’ll say a bit more about that later, but you can <a href="#data">skip ahead</a> if you’re interested.)</p>
+<p>I’ll get right to the point. <strong>Is there any evidence of more streaks over time? Not really.</strong></p>
+<p>First, let’s look at the streaks.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-streaks-1.png" width="864" /></p>
+<p>This plot starts with Season 20, after a five-win limit was eliminated (shortly after, Ken Jennings began his record-setting run). I’ve highlighted the top five longest streaks. It’s easy to see why the latest cluster at the far right might raise some eyebrows. But is it the tail end of a trend?</p>
+<p>Let’s look at the number of “long” win streaks over time. I defined a long streak as at least five consecutive wins (the limit when the show began).</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-streak-counts-by-season-1.png" width="672" /></p>
+<p>From the plot, it looks like maybe there has been a slight increase in long streaks in the past ~15 seasons, but it’s hard to argue there is a recent uptick (barring Season 38).</p>
+<p>What about streak length? The plot below shows the distribution of streak lengths for each season.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-streak-length-by-season-1.png" width="672" /></p>
+<p>This plot can be a little confusing at first. Each bar includes most of the win streaks for a season. The darkest shade includes 50% of the win streaks, the medium shade includes 80% of the win streaks, and the lightest shade includes 95% of the win streaks.</p>
+<p>This plot clearly shows that the most recent season is an extreme outlier. Excluding Season 38, it’s hard to see a clear increasing trend in average streak length, aside from the fact that win streaks got a little longer after the win limit was eliminated.</p>
+<p>James Holzhauer, one of the show’s record-holders, <a href="https://www.nytimes.com/2022/01/09/arts/television/jeopardy-streaks-amy-schneider.html?referringSource=articleShare">doesn’t think</a> the recent run of streaks is meaningful: “People always assume everything is a paradigm shift … when it’s actually fairly normal for results to occasionally cluster.” I think the data support his interpretation.</p>
+<div id="data" class="section level2">
+<h2>The data</h2>
+<p>J! Archive is an amazing resource, but it’s really designed for human readers to review individual games, not for computers to download massive amounts of data. I ran into a few difficulties with the way the data was formatted in J! Archive. I’ll share a couple of them partly for interest and partly so that if anyone decides to use my data, they will understand it may contain some errors.</p>
+<div id="contestant-names" class="section level3">
+<h3>Contestant names</h3>
+<p>Each game page includes full contestant names at the top of the page and “nicknames” (usually first names – the names that show up on people’s screens on <em>Jeopardy</em>) at the bottom of the page with the final scores.</p>
+<p>This created a challenge because while there is almost certainly only one “James Holzhauer” to compete on <em>Jeopardy</em>, there’s definitely <em>not</em> one “James” to ever compete on <em>Jeopardy</em>.</p>
+<p>To figure out streaks, it was helpful to first assign a unique identifier to each contestant, like their full name. Then I could figure out <em>which</em> James won or lost each game.</p>
+<p>In most cases, I could just compare the “nicknames” to the full names and look for a match. But some people named James go by Jim, for example, and in those cases, a direct match won’t work. So I had to manually add a bunch of special cases shown below.</p>
+<pre class="r"><code>find_full_contestant_name &lt;- function(contestant_list, nickname) {
+  # Remove all non-alpha characters 
+  #(except for hyphen, period, apostrophe, and internal spaces)
+  n &lt;- str_remove_all(nickname, &quot;[^a-zA-Z\\-.&#39; ]&quot;)
+  n &lt;- str_trim(n)
+  
+  # I&#39;ve hard-coded some nicknames here to take care of hard cases in the data
+  if (n == &quot;Mike&quot;) {
+    n &lt;- &quot;(Mike|Michael)&quot;
+  }
+  else if (n == &quot;Dave&quot;) {
+    n &lt;- &quot;(Dave|David)&quot;
+  }
+  else if (n == &quot;Tom&quot;) {
+    n &lt;- &quot;(Tom|Thomas)&quot;
+  }
+  else if (n == &quot;Dottie&quot;) {
+    n &lt;- &quot;(Dottie|Dorothy)&quot;
+  }
+  else if (n == &quot;Ernie&quot;) {
+    n &lt;- &quot;(Ernie|Ernest)&quot;
+  }
+  else if (n == &quot;Charlie&quot;) {
+    n &lt;- &quot;(Charlie|Charles)&quot;
+  }
+  else if (n == &quot;Ray&quot;) {
+    n &lt;- &quot;(Ray|Arthur)&quot;
+  }
+  else if (n == &quot;Sandy&quot;) {
+    n &lt;- &quot;(Sandy|Sandra)&quot;
+  }
+  else if (n == &quot;SSGT Paul&quot;) {
+    n &lt;- &quot;Paul Croshier&quot;
+  }
+  else if (n == &quot;DJ&quot;) {
+    n &lt;- &quot;(DJ|David)&quot;
+  }
+  else if (n == &quot;Sparky&quot;) {
+    n &lt;- &quot;(Sparky|John)&quot;
+  }
+  else if (n == &quot;Air Rob&quot;) {
+    n &lt;- &quot;(Air Rob|Rob)&quot;
+  }
+  else if (n == &quot;BobCat&quot;) {
+    n &lt;- &quot;(BobCat|Bob)&quot;
+  }
+  else if (n == &quot;MaryBeth&quot;) {
+    n &lt;- &quot;(MaryBeth|Mary Beth)&quot;
+  }
+  else if (n == &quot;zgn&quot;) {
+    n &lt;- &quot;Ozgun&quot;
+  }
+  else if (n == &quot;Julin&quot;) {
+    n &lt;- &quot;Julián&quot;
+  }
+  else if (n == &quot;Franois&quot;) {
+    n &lt;- &quot;Francois&quot;
+  }
+  else if (n == &quot;Rene&quot; || n == &quot;Renée&quot;) {
+    n &lt;- &quot;(Rene|Renée)&quot;
+  }
+  else if (n == &quot;Rb&quot;) {
+    n &lt;- &quot;Røb&quot;
+  }
+  else if (n == &quot;Dr. Oz&quot;) {
+    n &lt;- &quot;Dr. Mehmet Oz&quot;
+  }
+  else if (n == &quot;Desire&quot;) {
+    n &lt;- &quot;(Desirée|Desire)&quot;
+  }
+  else if (n == &quot;Frdrique&quot;) {
+    n &lt;- &quot;Frédérique&quot;
+  }
+  else if (n == &quot;Genevive&quot;) {
+    n &lt;- &quot;Geneviève&quot;
+  }
+  else if (n == &quot;Nio&quot;) {
+    n &lt;- &quot;Niño&quot;
+  }
+  else if (n == &quot;Steve-O&quot;) {
+    n &lt;- &quot;Steven&quot;
+  }
+  else if (n == &quot;Csar&quot;) {
+    n &lt;- &quot;César&quot;
+  }
+  else if (n == &quot;Sebastin&quot;) {
+    n &lt;- &quot;Sebastián&quot;
+  }
+  else if (n == &quot;Nadge&quot;) {
+    n &lt;- &quot;Nadège&quot;
+  }
+  else if (n == &quot;Andrs&quot;) {
+    n &lt;- &quot;Andrés&quot;
+  }
+  else if (n == &quot;Ramn&quot;) {
+    n &lt;- &quot;Ramón&quot;
+  }
+  else if (n == &quot;Anglica&quot;) {
+    n &lt;- &quot;Angélica&quot;
+  }
+
+  
+  # Cycle through all names in contestant list and look for a match
+  for (c in contestant_list) {
+    if (!is.na(str_match(str_to_lower(c), str_to_lower(n))[1])) {
+      return(c)
+    }
+  }
+  
+  # No matches found
+  print(paste(contestant_list[1],
+              contestant_list[2],
+              contestant_list[3], n,sep = &quot;,&quot;))
+  stop(&quot;Error: find_full_contestant_name found no name matches.&quot;)
+}</code></pre>
+<p>A number of the special cases were to match names that contained characters that I had stripped away at the beginning (which I did because I found a contestant whose nickname was in the archive as “<a href="https://www.j-archive.com/showgame.php?game_id=1441">Jen :)</a>”)</p>
+</div>
+<div id="interrupted-streaks" class="section level3">
+<h3>Interrupted streaks</h3>
+<p>Jeopardy occasionally runs special events like tournaments or college championships that are scheduled in advance and interrupt regular play. When identifying streaks, I had to skip past these events somehow.</p>
+<p>Luckily, J! Archive includes a “comments” field at the top of every page with notes about each episode like whether it was a tournament. So again, I used a brute-force approach, matching the contents of the comments field to a list in order to filter out all these special events.</p>
+<p>The difficulty, yet again, was figuring out how many different special events there were (I’m still not sure I caught them all). Here’s the snippet of code where I tried to exclude tournaments, championships, kids weeks, celebrity <em>Jeopardy</em>, and more.</p>
+<pre class="r"><code>streaks_by_season &lt;- j_data |&gt; 
+  filter(is.na(str_match(str_to_lower(comments), &quot;tournament&quot;))) |&gt;
+  filter(is.na(str_match(str_to_lower(comments), &quot;championship&quot;))) |&gt;
+  filter(is.na(str_match(str_to_lower(comments), &quot;battle&quot;))) |&gt;
+  filter(is.na(str_match(str_to_lower(comments), &quot;all-star&quot;))) |&gt;
+  filter(is.na(str_match(str_to_lower(comments), &quot;celebrity&quot;))) |&gt;
+  filter(is.na(str_match(str_to_lower(comments), &quot;kids&quot;))) |&gt;
+  filter(is.na(str_match(str_to_lower(comments), &quot;week&quot;))) |&gt;</code></pre>
+</div>
+</div>
+<div id="code" class="section level2">
+<h2>Code</h2>
+<p>The full analysis code I used to generate these plots is available <a href="https://github.com/alanjern/jeopardy-streaks">here</a>.</p>
+</div>
