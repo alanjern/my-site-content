@@ -11,14 +11,11 @@ comments: false
 
 In the **Computational Social Cognition Lab**, we mostly study how people think about other people. We do this using mathematical, computational, and experimental methods.
 
-If you're interested in doing psychology research, especially if you have programming experience, please [contact me](mailto:jern@rose-hulman.edu).
-
-## Current lab members
-
-* Stephen Payne, *Project*: Social prediction
+I'm not currently taking on new research assistants at the moment. But if you're interested in possible future research opportunities, feel free to [contact me](mailto:jern@rose-hulman.edu).
 
 ## Former lab members
 
+* Stephen Payne, *Project*: Social prediction
 * Andrea Wynn, *Project*: Moral character inference
 * Abi Raghuram, *Project*: Moral character inference
 * Anna Scott, *Project*: Inferring social relationships
