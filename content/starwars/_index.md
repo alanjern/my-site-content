@@ -109,6 +109,9 @@ gallery_item:
 - album: starwars
   image: 33-pittsburgh21.jpg
   caption: "Pittsburgh, May 2021"
+- album: starwars
+  image: 34-disneyland22.jpeg
+  caption: "Disneyland, August 2022"
 ---
 
 {{< gallery album="starwars" >}}
