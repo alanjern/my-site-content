@@ -9,38 +9,26 @@ profile: false
 comments: false
 ---
 
-## 2021-22 courses
+## 2022-23 courses
 
 ### Fall
 
-* Introduction to Psychology 
-* Cognitive Psychology ({{% staticref "uploads/syllabi/cogpsych_fall21.pdf" %}}previous syllabus{{% /staticref %}})
+* Introduction to Psychology ({{% staticref "uploads/syllabi/intro_fall22.pdf" %}}previous syllabus{{% /staticref %}})
+* Cognitive Psychology ({{% staticref "uploads/syllabi/cogpsych_fall22.pdf" %}}previous syllabus{{% /staticref %}})
 
 ### Winter
 
-* Applied Psychology ({{% staticref "uploads/syllabi/appliedpsych_winter21.pdf" %}}previous syllabus{{% /staticref %}})
-
-### Spring
-
-* Computational Psychology ({{% staticref "uploads/syllabi/comppsych_spring22.pdf" %}}previous syllabus{{% /staticref %}})
-* Introduction to Psychology ({{% staticref "uploads/syllabi/intro_spring22.pdf" %}}previous syllabus{{% /staticref %}})
-
-## Planned 2022-23 courses
-
-### Fall
-
-* Introduction to Psychology 
-* Cognitive Psychology
-
-### Winter
-
-* Social Psychology ({{% staticref "uploads/syllabi/social_spring19.pdf" %}}previous syllabus{{% /staticref %}})
+* Social Psychology ({{% staticref "uploads/syllabi/social_winter22.pdf" %}}previous syllabus{{% /staticref %}})
 
 ### Spring
 
 * Moral Psychology ({{% staticref "uploads/syllabi/moralpsych_winter20.pdf" %}}previous syllabus{{% /staticref %}})
 * Methods for Studying Human Behavior ({{% staticref "uploads/syllabi/methods_spring21.pdf" %}}previous syllabus{{% /staticref %}})
 
+## Other courses
+
+* Applied Psychology ({{% staticref "uploads/syllabi/appliedpsych_winter21.pdf" %}}previous syllabus{{% /staticref %}})
+* Computational Psychology ({{% staticref "uploads/syllabi/comppsych_spring22.pdf" %}}previous syllabus{{% /staticref %}})
 
 ## Books
 
